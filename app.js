@@ -33,7 +33,12 @@ app.use(express.static(path.join(__dirname, "/public")));
 const sessionOptions = {
     secret: "mysupersecretcode",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+    },
 };
 
 app.use(session(sessionOptions));
@@ -74,4 +79,4 @@ app.use((err, req, res, next) => {
 
 app.listen(8080, () => {
     console.log("server is listing to port 8080");
-});
+});  
